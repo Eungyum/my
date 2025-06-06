@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="content fadein">
+  <div class="container-fluid fadein chat-container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="chat-header text-center intro">
+          <h2>AI와 대화하기</h2>
+        </div>
+        <div class="chat-box" id="chat-box">
+          <!-- 여기에 채팅 메시지들이 쌓입니다 -->
+        </div>
+        <form class="form mt-md" id="chat-form" data-api-url="{% url 'about_gpt' %}">
+          {% csrf_token %}
+          <label>사이트 주인에 대해 질문해 보세요. Google Gemini gemma-3-27b-it 적용함.</label>
+          <textarea class="chat-input form-control" id="user-input" rows="1" placeholder="질문을 입력하세요..." required></textarea>
+          <button class="btn btn-default" id="send" type="submit">전송</button><span class="p-md"></span>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="content fadein" style="background-color:#eee;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <div class="col-md-12 col-sm-5"> <!-- id="sticky"-->
+              <div class="selfie"><img class="mt-lg" src="{{ about.photo.url }}" style="width: 150px; height: auto;"></div>
+              <h4>{{ about.name }}</h4>
+              <table class="table mt-md" style="font-size: 0.8rem;">
+                <tr>
+                  <td> <strong>포지션</strong></td>
+                  <td>컨설턴트</td>
+                </tr>
+                <tr>
+                  <td> <strong>분야</strong></td>
+                  <td>시계열, 머신러닝, 딥러닝, 데이터사이언스</td>
+                </tr>
+                <tr>
+                  <td> <strong>석사</strong></td>
+                  <td>{{ about.major1 }}</td>
+                </tr>
+                <tr>
+                  <td> <strong>학사</strong></td>
+                  <td>{{ about.major2 }}</td>
+                </tr>
+                
+              </table>
+            </div>
+          </div>
+
+          <div class="col-md-6 mx-auto mt-5">
+            {% comment %} <div id="sticky-holder"> {% endcomment %}
+              <h2 class="animated-text">{{ about.title }}</h2>
+              <div style="font-size: 0.8rem; line-height: 1.8;">
+                {{ about.content|safe }}
+              </div>
+            {% comment %} </div> {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="content mt-lg fadein">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>최근 생각들</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <a class="smooth" href="work-single.html">
+        <img src="{{ about.ongoing_pl.url }}">
+      </a>
+    </div>
+  </div>
+</section>
+<script src="{% static 'scripts/chatbot.js' %}"></script>
+{% endblock %}
+
+
+
+
+
+
+      

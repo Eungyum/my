@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title> - Responsive HTML5 Portfolio Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/vendor/all.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/vendor/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/core.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/elements.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/custom.css' %}?v=123">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'img/all/logo.png' %}">
+  </head>
+  <body class="preload">
+    <div class="container-fluid">
+      <header>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 text-center"><a class="brand" href="{% url 'work_root' %}"><img class="default" src="{% static 'img/DataGyum2.png' %}"><img class="white" src="{% static 'img/all/logo.png' %}"></a>
+              <ul class="main-nav">
+                <li><a href="{% url menus.menu1_link %}"
+                  class="{% if request.path == menus.menu1_link_url %}active{% endif %}"
+                  title="Work">{{ menus.menu1 }}</a>
+                </li>
+                <li><a href="{% url menus.menu2_link %}"
+                  class="{% if request.path == menus.menu2_link_url %}active{% endif %}"
+                  title="About">{{ menus.menu2 }}</a>
+                </li>
+                <li><a href="{% url menus.menu3_link %}"
+                  class="{% if request.path == menus.menu3_link_url %}active{% endif %}"
+                  title="Blog">{{ menus.menu3 }}</a>
+                </li>
+                <li><a href="{% url menus.menu4_link %}"
+                  class="{% if request.path == menus.menu4_link_url %}active{% endif %}"
+                  title="Contact">{{ menus.menu4 }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+      {% block content %}{% endblock %}
+      <footer>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 text-center"><span>&copy; Eungyum.</span></div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- 필수: Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="..." crossorigin="anonymous"></script>
+
+    <script src="{% static 'scripts/vendor.js' %}"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
+    <!-- The type animation script-->
+    <script>if(document.querySelector('.typed')) var typed = new Typed('.typed', { strings: ["DS", "경제", "금융", "시계열", "머신러닝", "딥러닝", "파이썬", "오라클"], typeSpeed: 40, loop: true });</script>
+  </body>
+</html>

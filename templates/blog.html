@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section>
+  <div class="d-flex justify-content-center" style="text-align: center;">
+    <form method="GET" action="{% url 'blog_root' %}">
+      {% csrf_token %}
+      <label class="text-center w-100">콘텐츠 검색</label>
+      <input class="form-control w-100 mx-auto" type="text" name="q" value="{{ query }}" placeholder="검색어를 입력하세요.">
+    </form>
+  </div>
+</section>
+<section>
+  <div class="container-fluid content">
+    {% for post in page_obj %}
+      <a class="fadein blog-item d-block mb-4" href="{% url 'blog_detail' post.pk %}">
+        <div>
+          <h2>{{ post.title }}</h2>
+        </div>
+        <div>
+          <img alt="" src="{{ post.thumbnail2.url }}">
+        </div>
+        <div class="info mt-2">
+          <div class="date">{{ post.created_at }}</div>
+          <div class="category">{{ post.category }}</div>
+          <div class="tag">{{ post.tags.all|join:", " }}</div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+    
+    {% comment %} <a class="fadein blog-item" href="blog-single.html">
+    <h2>The other side of design</h2><img alt="Ben Template - By ThemeVillain" src="{% static 'img/portfolio/face-side.jpg' %}">
+    <div class="info">
+      <div class="author">By Ben Bryden on November 27, 2020</div>
+      <div class="tag">Productivity, Health</div>
+    </div></a>
+    
+    <a class="fadein blog-item" href="blog-single.html">
+    <h2>Practice more and be crazy</h2><img alt="Ben Template - By ThemeVillain" src="{% static 'img/portfolio/logo-a.jpg' %}">
+    <div class="info">
+      <div class="author">By Ben Bryden on November 27, 2020</div>
+      <div class="tag">Productivity, Creativity</div>
+    </div></a> {% endcomment %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="paginate mt-xl">
+          {% if page_obj.has_previous %}
+            <a class="icon disabled previous" href="?q={{ query }}&page={{ page_obj.previous_page_number }}">
+              <img src="{% static 'img/ui/arrow-back-outline.svg' %}" height="25">
+            </a>
+          {% endif %}
+          
+          {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+              <a class="btn btn-default active" href="?q={{ query }}&page={{ num }}">{{ num }}</a>
+            {% else %}
+              <a class="btn btn-default" href="?q={{ query }}&page={{ num }}">{{ num }}</a>
+            {% endif %}
+          {% endfor %}
+
+          {% if page_obj.has_next %}
+            <a class="icon next" href="?q={{ query }}&page={{ page_obj.next_page_number }}">
+              <img src="{% static 'img/ui/arrow-forward-outline.svg' %}" height="25">
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

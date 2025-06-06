@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <section class="fs-portfolio fadein">
+    <ul class="fs-images">
+      {% for post in posts %}
+        <li style="background-image: url('{{ post.thumbnail1.url }}')"> 
+          <h1>{{ post.pop_words }}</h1>
+        </li>
+      {% endfor %}
+    </ul>
+    <ul class="fs-navigation">
+      {% for post in posts %}
+      <li class="active"><a href="{% url 'blog_detail' post.pk %}">{{ post.pop_words }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock %}

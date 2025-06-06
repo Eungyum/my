@@ -1,0 +1,41 @@
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.chat-message {
+    margin: 10px 0;
+    max-width: 75%;
+    padding: 10px;
+    border-radius: 10px;
+    clear: both;
+}
+
+/* 내 질문(오른쪽) */
+.chat-message.user {
+    background: #eee;
+    align-self: flex-end;
+    text-align: right;
+    margin-left: auto; /* 오른쪽으로 붙이기 */
+}
+
+/* GPT 대답(왼쪽) */
+.chat-message.bot {
+    background: #eee;
+    align-self: flex-start;
+    text-align: left;
+    margin-right: auto; /* 왼쪽으로 붙이기 */
+}
+
+
+/* 메시지 점점 사라짐 */
+.fade-out-message {
+  transition: opacity 1s ease;
+}
+.fade-out-message.hidden {
+  opacity: 0;
+}
